@@ -20,6 +20,8 @@ const bars = [{
   'pricePerPerson': 80
 }];
 
+
+
 //list of current booking events
 //useful for ALL steps
 //the time is hour
@@ -145,6 +147,24 @@ const actors = [{
     'amount': 0
   }]
 }];
+
+function calculatePrice() {
+  var priceHour;
+  var pricePerson;
+  var ind;
+  var event;
+  for (event in events){
+    for (ind in bars) {
+      if (events[event].barId == bars[ind].id) {
+        priceHour = bars[ind].pricePerHour;
+        pricePerson = bars[ind].pricePerPerson;
+      }
+    }
+    events[event].price = (events[event].time * priceHour + events[event].persons * pricePerson);
+  }
+}
+calculatePrice();
+
 
 console.log(bars);
 console.log(events);
