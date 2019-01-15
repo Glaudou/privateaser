@@ -208,7 +208,20 @@ function deductible(){
 }
 
 function actorsDebitCredit() {
-
+  var actor;
+  var event;
+  var index =0;
+  for (actor in actors) {
+    for (event in events) {
+      if (actors[actor].eventId == events[event].id) {
+        actors[actor].payment[0].amount = events[event].price;
+        actors[actor].payment[1].amount = events[event].price - (events[event].commission.insurance + events[event].commission.treasury + events[event].commission.privateaser);
+        actors[actor].payment[2].amount = events[event].commission.insurance;
+        actors[actor].payment[3].amount = events[event].commission.treasury;
+        actors[actor].payment[4].amount = events[event].commission.privateaser;
+      }
+    }
+  }
 }
 
 calculatePrice();
