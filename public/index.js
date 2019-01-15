@@ -193,7 +193,7 @@ function commission() {
   for (event in events){
     events[event].commission.insurance = 0.15*events[event].price;
     events[event].commission.treasury = events[event].persons;
-    events[event].commission.privateaser = events[event].price - (events[event].commission.insurance + events[event].commission.treasury);
+    events[event].commission.privateaser = 0.3 * events[event].price - (events[event].commission.insurance + events[event].commission.treasury);
   }
 }
 
@@ -202,14 +202,20 @@ function deductible(){
   for (event in events){
     if (events[event].options.deductibleReduction == true) {
       events[event].price += events[event].persons;
+      events[event].commission.privateaser += events[event].persons;
     }
   }
+}
+
+function actorsDebitCredit() {
+
 }
 
 calculatePrice();
 calculateDiscount();
 commission();
 deductible();
+actorsDebitCredit();
 
 
 console.log(bars);
