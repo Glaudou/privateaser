@@ -163,7 +163,35 @@ function calculatePrice() {
     events[event].price = (events[event].time * priceHour + events[event].persons * pricePerson);
   }
 }
+
+function calculateDiscount() {
+  var index = 0;
+  var event;
+  var priceHour;
+  var pricePerson;
+  for (event in events){
+    for (index in bars) {
+      if (events[event].barId == bars[index].id) {
+        priceHour = bars[index].pricePerHour;
+        pricePerson = bars[index].pricePerPerson;
+      }
+    }
+     if (events[event].persons > 10 && events[event].persons <= 20) {
+       events[event].price = (events[event].time * priceHour + 0.9 * events[event].persons * pricePerson);
+     }
+     if (events[event].persons > 20 && events[event].persons <= 60) {
+       events[event].price = (events[event].time * priceHour + 0.7 * events[event].persons * pricePerson);
+     }
+     if (events[event].persons > 60) {
+       events[event].price = (events[event].time * priceHour + 0.5 * events[event].persons * pricePerson);
+     }
+     index = 0;
+  }
+}
+
 calculatePrice();
+calculateDiscount();
+
 
 
 console.log(bars);
