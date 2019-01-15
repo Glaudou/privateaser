@@ -197,9 +197,19 @@ function commission() {
   }
 }
 
+function deductible(){
+  var event;
+  for (event in events){
+    if (events[event].options.deductibleReduction == true) {
+      events[event].price += events[event].persons;
+    }
+  }
+}
+
 calculatePrice();
 calculateDiscount();
 commission();
+deductible();
 
 
 console.log(bars);
