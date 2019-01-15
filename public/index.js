@@ -189,9 +189,17 @@ function calculateDiscount() {
   }
 }
 
+function commission() {
+  for (event in events){
+    events[event].commission.insurance = 0.15*events[event].price;
+    events[event].commission.treasury = events[event].persons;
+    events[event].commission.privateaser = events[event].price - (events[event].commission.insurance + events[event].commission.treasury);
+  }
+}
+
 calculatePrice();
 calculateDiscount();
-
+commission();
 
 
 console.log(bars);
